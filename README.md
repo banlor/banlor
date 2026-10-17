@@ -4,7 +4,7 @@
 
 5+ years in production infrastructure. I run Kubernetes platforms in regulated banking and build the automation around them: release orchestration, observability, AI code review, LLM services in production. Upstream fixes merged in Ceph, Rook, Grafana Mimir and vLLM.
 
-Open to remote work and relocation · [LinkedIn](https://linkedin.com/in/michael-basov) · [michael.s.basov@gmail.com](mailto:michael.s.basov@gmail.com)
+Open to remote work and relocation · [Website](https://mikhailbasov.github.io/) · [LinkedIn](https://linkedin.com/in/michael-basov) · [michael.s.basov@gmail.com](mailto:michael.s.basov@gmail.com)
 
 [![Merged upstream PRs](https://img.shields.io/github/issues-search?query=author%3Abanlor%20is%3Apr%20is%3Amerged%20-user%3Abanlor%20-user%3Aruslan-shaydullin&label=merged%20upstream%20PRs&style=flat-square)](https://github.com/search?q=author%3Abanlor+is%3Apr+is%3Amerged+-user%3Abanlor+-user%3Aruslan-shaydullin&type=pullrequests)
 
