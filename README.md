@@ -1,6 +1,6 @@
 # Mikhail Basov
 
-### Senior DevOps / Platform Engineer at Sberbank
+### DevOps Engineer at Sberbank
 
 I build the release platform for Sberbank's Risk division (about 1,500 microservices). Around 150 releases a week now go to production at night on their own. Outside work I find Prometheus alerts that can never fire and fix them in open-source projects.
 
@@ -12,14 +12,13 @@ Open to remote work and relocation · [Website](https://mikhailbasov.github.io/)
 
 ## At Sberbank
 
-**Risk Division** · Senior DevOps Engineer · remote · at Sberbank since 2024
+**Risk Division** · DevOps Engineer · remote · at Sberbank since 2024
 
 - **Autonomous deployments.** About **150 releases a week** go to production unattended, in night and weekend maintenance windows. The system plans each rollout and re-checks the gates before every step. Engineers have almost stopped staying late for releases, and deployment errors went down.
-- **Release orchestration.** Built it and run it (Django, PostgreSQL, async workers). It connects CI with Jira, Nexus and quality gates; coordinating a release went from **2–4 hours to under 10 minutes**.
-- **AI code review.** Started and shipped a production reviewer for Bitbucket pull requests: **1,200+ a day**, about **30 s** per review at the median. It got the internal *Engineering Achievement of the Year 2025* award, and I gave a talk about it at an internal conference.
+- **Release orchestration.** Built it and run it (Python, PostgreSQL, async workers). It connects CI with Jira, Nexus and quality gates; coordinating a release went from **2–4 hours to under 10 minutes**.
+- **AI code review.** Started and shipped a production reviewer for Bitbucket pull requests: **up to 1,200+ a day**, about **30 s** per review at the median. It got the internal *Engineering Achievement of the Year 2025* award, and I gave a talk about it at an internal conference.
 - **Kubernetes.** I work with 24 of the division's ~100 clusters, dev to production, and run **70+ production services and 6 LLM agents** under a **99.9% SLO**. Incident response, RCA, automated recovery and graceful degradation.
 - **RAG assistant** for credit managers. In its pilot it closed **30%** of routine requests with no human involved.
-- **Mentoring.** Three engineers so far.
 
 Before that (2022–2024): systems engineer at USSC, Yekaterinburg. Enterprise DLP and PAM rollouts, Linux hardening, PostgreSQL, mentoring interns.
 
@@ -50,11 +49,11 @@ Claude Code and Codex do the legwork: investigation, patches, tests. I write the
 
 ## Stack
 
-[![Stack](https://skillicons.dev/icons?i=kubernetes,docker,linux,postgres,kafka,redis,jenkins,ansible,python,bash,django,prometheus,grafana,elasticsearch,bitbucket&perline=15)](#stack)
+[![Stack](https://skillicons.dev/icons?i=kubernetes,docker,linux,postgres,kafka,redis,jenkins,ansible,python,bash,prometheus,grafana,elasticsearch,bitbucket&perline=15)](#stack)
 
 Helm · Groovy shared libraries · PromQL / promtool · OpenTelemetry · Dynatrace · ELK · pgvector · RAG · MCP · Qwen
 
-- **Certified:** AWS Solutions Architect – Associate · AWS CloudOps Engineer – Associate · HashiCorp Terraform Associate
+- **Certification:** AWS Solutions Architect – Associate (in progress)
 - **Studying:** BSc Software Engineering at Ural Federal University, part-time, graduating in 2027
 - **Languages:** English B2, Russian native
 - **Community:** judge at CSC Back-to-School Hackathon 2026 (Devpost, 115 submissions); judging CSC Winter Sparkathon, Nov 30 – Dec 6, 2026
