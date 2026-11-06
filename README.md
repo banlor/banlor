@@ -20,7 +20,7 @@ Open to remote work and relocation · [Website](https://mikhailbasov.github.io/)
 - **Kubernetes.** I work with 24 of the division's ~100 clusters, dev to production, and run **70+ production services and 6 LLM agents** under a **99.9% SLO**. Incident response, RCA, automated recovery and graceful degradation.
 - **RAG assistant** for credit managers. In its pilot it closed **30%** of routine requests with no human involved.
 
-Before that (2022–2024): systems engineer at USSC, Yekaterinburg. Enterprise DLP and PAM rollouts, Linux hardening, PostgreSQL, mentoring interns.
+Before that (2022–2024): systems engineer at USSC, Yekaterinburg. Enterprise DLP and PAM rollouts, Linux hardening, PostgreSQL, mentoring three engineering interns.
 
 ## Merged upstream
 
