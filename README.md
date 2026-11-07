@@ -2,58 +2,61 @@
 
 ### DevOps Engineer at Sberbank
 
-I build the release platform for Sberbank's Risk division (about 1,500 microservices). Around 150 releases a week now go to production at night on their own. Outside work I find Prometheus alerts that can never fire and fix them in open-source projects.
+I have 3 years in DevOps and 5+ in IT. In Sberbank's Risk Division I run 70+ services and 6 LLM agents on 24 Kubernetes clusters, from dev to production. I built the release platform and the unattended rollout service behind about 150 releases a week. I also built an AI code reviewer that handles 1,200+ pull requests a day at peak. Outside work I fix shipped Prometheus alert rules. My fixes are merged in Ceph, Rook, Grafana Mimir and other projects.
 
-Open to remote work and relocation · [Website](https://mikhailbasov.github.io/) · [LinkedIn](https://linkedin.com/in/michael-basov) · [michael.s.basov@gmail.com](mailto:michael.s.basov@gmail.com)
+Astana, Kazakhstan · open to remote work and relocation · [LinkedIn](https://linkedin.com/in/michael-basov) · [michael.s.basov@gmail.com](mailto:michael.s.basov@gmail.com)
 
 <sub>Also written as Michael Basov.</sub>
 
 [![Merged upstream PRs](https://img.shields.io/github/issues-search?query=author%3Abanlor%20is%3Apr%20is%3Amerged%20-user%3Abanlor%20-user%3Aruslan-shaydullin&label=merged%20upstream%20PRs&style=flat-square)](https://github.com/search?q=author%3Abanlor+is%3Apr+is%3Amerged+-user%3Abanlor+-user%3Aruslan-shaydullin&type=pullrequests)
 
-## At Sberbank
+## Work
 
-**Risk Division** · DevOps Engineer · remote · at Sberbank since 2024
+Sberbank · Risk Division · remote · since February 2024
 
-- **Autonomous deployments.** About **150 releases a week** go to production unattended, in night and weekend maintenance windows. The system plans each rollout and re-checks the gates before every step. Engineers have almost stopped staying late for releases, and deployment errors went down.
-- **Release orchestration.** Built it and run it (Python, PostgreSQL, async workers). It connects CI with Jira, Nexus and quality gates; coordinating a release went from **2–4 hours to under 10 minutes**.
-- **AI code review.** Started and shipped a production reviewer for Bitbucket pull requests: **up to 1,200+ a day**, about **30 s** per review at the median. It got the internal *Engineering Achievement of the Year 2025* award, and I gave a talk about it at an internal conference.
-- **Kubernetes.** I work with 24 of the division's ~100 clusters, dev to production, and run **70+ production services and 6 LLM agents** under a **99.9% SLO**. Incident response, RCA, automated recovery and graceful degradation.
-- **RAG assistant** for credit managers. In its pilot it closed **30%** of routine requests with no human involved.
+- I built the rollout service that deploys about **150 releases a week** to production. It installs them at night and on weekends, in the bank's maintenance windows. It re-checks approvals before each step, and a failed wave stops the waves after it. After a crash it checks what really ran instead of retrying blindly. Across the division, about 86% of production installs now start unattended.
+- I built the release platform (Python, PostgreSQL, Helm), and I am its only maintainer. The division has about 1,500 microservices, and nearly all of their releases are created on it. It assembles each release from Jira tasks and Nexus builds, fills in the change request and moves it through quality gates. Release coordination went from **2–4 hours to under 10 minutes**. After my 2026 redesign the platform grew from 2 teams to about 40.
+- I moved our services and their CI from OpenShift to Kubernetes. I write their Helm charts for Argo CD (GitOps), with Istio routing, retries and mTLS gateway rules as templates. On clusters that a platform team runs, I set probes and requests/limits. Readiness checks the database and liveness checks only the process, so long installs are not restarted.
+- I write CI/CD pipelines as code in Jenkins on Groovy shared libraries, with SAST/SCA scans and Vault secrets. The services I run have a 99.9% SLO. I designed the Prometheus metrics and alerts for my own services. I troubleshoot production issues in Grafana, ELK and Dynatrace and handle incident response and root cause analysis.
+- I initiated and shipped an AI code reviewer for Bitbucket pull requests: **1,200+ a day at peak**, about 30 s median latency. It started as a Jenkins job. When the load grew, I rewrote it as a Python service on Kubernetes. It won the internal 2025 Engineering Achievement of the Year award. I presented it at an internal engineering conference.
+- I operate 6 LLM agents in production. I also built a RAG assistant for credit managers: PostgreSQL with pgvector, a Confluence knowledge base and a second model that checks answers. In its pilot it closed 30% of routine requests with no human involved.
 
-Before that (2022–2024): systems engineer at USSC, Yekaterinburg. Enterprise DLP and PAM rollouts, Linux hardening, PostgreSQL, mentoring three engineering interns.
+From 2022 to 2024 I was a Systems Engineer at USSC (Ural Security Systems Center) in Yekaterinburg. I deployed InfoWatch DLP and PAM for enterprise clients and ran a full DLP rollout on Unix. I also hardened Linux servers, administered PostgreSQL, troubleshot Docker and mentored 3 engineering interns. I started in IT in 2021 as a System Administrator at IT-Service: Windows Server, Active Directory, Bash and PowerShell.
 
 ## Merged upstream
 
-Most of these are alert rules that could never fire. I audit widely used Prometheus alert rules for silent or misfiring alerts and fix them upstream with `promtool` regression tests. AI-assisted, disclosed in each PR. The write-up, *Silent or Wrong: Producer-Contract Defects in Shipped Prometheus Alerting Rules*, comes out as a preprint in November 2026.
+I audit widely used Prometheus rule sets and send fixes upstream, usually with `promtool` regression tests. From May to November 2026, 17 of my PRs were merged in 10 projects. Twelve of them fix shipped alert rules.
 
-| Project | PR | What changed | Shipped |
+My preprint *Silent or Wrong: Producer-Contract Defects in Shipped Prometheus Alerting Rules* comes out in November 2026. For the study I audited 1,808 shipped alert rules from 86 rule sets. I confirmed 31 distinct defects that `promtool` and offline Pint miss. In at least 19 of them the alert cannot fire in the situation it was written for.
+
+| Project | PR | What changed | Status |
 |---|---|---|---|
-| [Ceph](https://github.com/ceph/ceph) · 17k★ | [#72067](https://github.com/ceph/ceph/pull/72067) | `CephPoolGrowthWarning` compared a fraction with `95` instead of `0.95`, so it could never fire | Merged · [tracker #80856](https://tracker.ceph.com/issues/80856) |
-| [Rook](https://github.com/rook/rook) · CNCF graduated · 13k★ | [#18453](https://github.com/rook/rook/pull/18453) · [#18476](https://github.com/rook/rook/pull/18476) | Pool-growth and NVMe-oF CPU alerts compared 0–1 values with `95` and `80`, so they never fired | [v1.20.9](https://github.com/rook/rook/releases/tag/v1.20.9) |
-| [Grafana Mimir](https://github.com/grafana/mimir) · 5k★ | [#16725](https://github.com/grafana/mimir/pull/16725) | Ruler alerts ignored `server_error`, so real push and query failures stayed silent | [CHANGELOG](https://github.com/grafana/mimir/blob/main/CHANGELOG.md) |
-| | [#16739](https://github.com/grafana/mimir/pull/16739) | KEDA alert read a metric removed in KEDA 2.17; now supports old and new | Merged |
-| [awesome-prometheus-alerts](https://github.com/samber/awesome-prometheus-alerts) · 8k★ | [#646](https://github.com/samber/awesome-prometheus-alerts/pull/646) | 7 rules repaired: a Kubernetes rule file that failed to load, missing series, unreachable thresholds. Added `promtool` tests to CI | Merged |
+| [Ceph](https://github.com/ceph/ceph) | [#72067](https://github.com/ceph/ceph/pull/72067) | `CephPoolGrowthWarning` compared a fraction with `95` instead of `0.95`, so it could never fire | Merged · [tracker #80856](https://tracker.ceph.com/issues/80856) |
+| [Rook](https://github.com/rook/rook) | [#18453](https://github.com/rook/rook/pull/18453) · [#18476](https://github.com/rook/rook/pull/18476) | Pool-growth and NVMe-oF CPU alerts compared 0–1 values with `95` and `80`, so they could never fire | In 5 releases: [v1.20.9](https://github.com/rook/rook/releases/tag/v1.20.9), v1.20.10, v1.21.0–v1.21.2 |
+| [Grafana Mimir](https://github.com/grafana/mimir) | [#16725](https://github.com/grafana/mimir/pull/16725) · [#16739](https://github.com/grafana/mimir/pull/16739) | Ruler alerts ignored `server_error`, so real push and query failures stayed silent. A KEDA alert read a metric that KEDA 2.17 removed. It now reads the new metric and falls back to the old one | Merged · in [CHANGELOG](https://github.com/grafana/mimir/blob/main/CHANGELOG.md), unreleased |
+| [Grafana jsonnet-libs](https://github.com/grafana/jsonnet-libs) | [#1709](https://github.com/grafana/jsonnet-libs/pull/1709) · [#1710](https://github.com/grafana/jsonnet-libs/pull/1710) · [#1716](https://github.com/grafana/jsonnet-libs/pull/1716) · [#1717](https://github.com/grafana/jsonnet-libs/pull/1717) · [#1718](https://github.com/grafana/jsonnet-libs/pull/1718) | Alerts in 9 mixins, including Istio, Jaeger and F5 BIG-IP, stayed silent or fired when values fell. Causes included 0–1 ratios compared with percent thresholds, `increase()` on gauges and broken vector matching | Merged |
+| [awesome-prometheus-alerts](https://github.com/samber/awesome-prometheus-alerts) | [#646](https://github.com/samber/awesome-prometheus-alerts/pull/646) | Repaired 7 rules: a Kubernetes rule file that failed to load, missing series, unreachable thresholds. Added `promtool` tests to CI | Merged |
 | [argo-cd-mixin](https://github.com/adinhodovic/argo-cd-mixin) | [#41](https://github.com/adinhodovic/argo-cd-mixin/pull/41) | Latency alerts required a P95 above the last histogram bucket, which is unreachable | Merged |
-| [vLLM Production Stack](https://github.com/vllm-project/production-stack) · 2.7k★ | [#940](https://github.com/vllm-project/production-stack/pull/940) | Added a per-model request latency histogram to the router | [vllm-stack 0.1.11](https://github.com/vllm-project/production-stack/releases/tag/vllm-stack-0.1.11) |
-| | [#943](https://github.com/vllm-project/production-stack/pull/943) | Dashboard counted every backend once per router replica | [vllm-stack 0.1.12](https://github.com/vllm-project/production-stack/releases/tag/vllm-stack-0.1.12) |
+| [vLLM Production Stack](https://github.com/vllm-project/production-stack) | [#940](https://github.com/vllm-project/production-stack/pull/940) · [#943](https://github.com/vllm-project/production-stack/pull/943) | Added a per-model request latency histogram to the router. Fixed a dashboard that counted every backend once per router replica | Released in [vllm-stack 0.1.11](https://github.com/vllm-project/production-stack/releases/tag/vllm-stack-0.1.11) · [0.1.12](https://github.com/vllm-project/production-stack/releases/tag/vllm-stack-0.1.12) |
 
-**One example: [Mimir #16725](https://github.com/grafana/mimir/pull/16725).** `MimirRulerTooManyFailedPushes` and `MimirRulerTooManyFailedQueries` matched `reason="error"`, but the ruler records server-side failures as `server_error`. So a ruler failing 5% of its queries never paged anyone. The selectors now include `server_error`, keep legacy series and exclude `client_error`. Synthetic checks: 5% server errors mixed with 20% client errors now fires; client errors alone, or exactly 1% server errors, do not.
+One example is [Mimir #16725](https://github.com/grafana/mimir/pull/16725). `MimirRulerTooManyFailedPushes` and `MimirRulerTooManyFailedQueries` counted only failures with `reason="error"` or no reason. But the ruler records server-side failures as `server_error`. So a ruler failing 5% of its queries would not page anyone. The selectors now include `server_error`, keep legacy series and exclude `client_error`. In synthetic checks the query alert now fires on 5% server errors mixed with 20% client errors. It stays quiet on client errors alone or on exactly 1% server errors.
 
-Also merged: Russian localization of the Linux security docs in [kubernetes/website #55710](https://github.com/kubernetes/website/pull/55710).
+Also merged: [VictoriaMetrics #11591](https://github.com/VictoriaMetrics/VictoriaMetrics/pull/11591) (Azure workload identity for `azure_sd_configs`, credited in the changelog) · [kubernetes/website #55710](https://github.com/kubernetes/website/pull/55710) (Russian translation of the docs page on Linux node security) · [opentelemetry-python-contrib #4539](https://github.com/open-telemetry/opentelemetry-python-contrib/pull/4539) (test-dependency update for google-genai)
 
-**In review:** [Thanos #9057](https://github.com/thanos-io/thanos/pull/9057) · [Thanos #9058](https://github.com/thanos-io/thanos/pull/9058) · [kube-prometheus #2901](https://github.com/prometheus-operator/kube-prometheus/pull/2901) · [kubernetes-mixin #1306](https://github.com/kubernetes-sigs/kubernetes-mixin/pull/1306) · [Ceph #72211](https://github.com/ceph/ceph/pull/72211) · [postgres_exporter #1397](https://github.com/prometheus-community/postgres_exporter/pull/1397)
+Open alert-rule PRs: [etcd #22701](https://github.com/etcd-io/etcd/pull/22701) · [Ceph #72211](https://github.com/ceph/ceph/pull/72211) · [Thanos #9057](https://github.com/thanos-io/thanos/pull/9057) · [Thanos #9058](https://github.com/thanos-io/thanos/pull/9058) · [kube-prometheus #2901](https://github.com/prometheus-operator/kube-prometheus/pull/2901) · [Grafana Mimir #16730](https://github.com/grafana/mimir/pull/16730) · [postgres_exporter #1397](https://github.com/prometheus-community/postgres_exporter/pull/1397)
 
 ## How I use AI
 
-Claude Code and Codex do the legwork: investigation, patches, tests. I write the plan, review every diff and answer for what gets merged. The AI reviewer above is the production version of the same approach. Upstream PRs say how AI was used and follow each project's AI policy.
+Claude Code and Codex do most of the investigation and draft the patches and tests. I write the plan and review every diff before a PR goes upstream. All 12 alert-rule PRs say how AI was used. At work I added an MCP server to my rollout service. AI coding agents can use it to build and check install plans under the same rules as people. Only a person can cancel an install.
 
 ## Stack
 
-[![Stack](https://skillicons.dev/icons?i=kubernetes,docker,linux,postgres,kafka,redis,jenkins,ansible,python,bash,prometheus,grafana,elasticsearch,bitbucket&perline=15)](#stack)
+[![Kubernetes, OpenShift, Docker, Jenkins, Git, Bitbucket, Ansible, Terraform, AWS, Linux, Bash, Python, PostgreSQL, Redis, Kafka, Prometheus, Grafana, Elasticsearch](https://skillicons.dev/icons?i=kubernetes,openshift,docker,jenkins,git,bitbucket,ansible,terraform,aws,linux,bash,python,postgresql,redis,kafka,prometheus,grafana,elasticsearch&perline=9)](#stack)
 
-Helm · Groovy shared libraries · PromQL / promtool · OpenTelemetry · Dynatrace · ELK · pgvector · RAG · MCP · Qwen
+Helm · Argo CD (GitOps) · Istio · Groovy shared libraries · Vault · Nexus · Jira · SAST/SCA · promtool · Dynatrace · ELK · pgvector · RAG · MCP · vLLM Production Stack (OSS)
 
-- **Certification:** AWS Solutions Architect – Associate (in progress)
-- **Studying:** BSc Software Engineering at Ural Federal University, part-time, graduating in 2027
-- **Languages:** English B2, Russian native
-- **Community:** judge at CSC Back-to-School Hackathon 2026 (Devpost, 115 submissions); judging CSC Winter Sparkathon, Nov 30 – Dec 6, 2026
+- Cloud and IaC: AWS (EC2, S3, IAM), Terraform, Ansible
+- Certification: AWS Certified Solutions Architect – Associate (in progress)
+- Studying: BSc Software Engineering at Ural Federal University, part-time, expected 2027
+- Languages: English B2, Russian native
+- Community: judge at CSC Back-to-School Hackathon 2026 (Devpost); judging CSC Winter Sparkathon, Nov 30 – Dec 6, 2026
