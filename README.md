@@ -12,7 +12,7 @@ Astana, Kazakhstan · open to remote work and relocation · [LinkedIn](https://l
 
 ## Work
 
-Sberbank · Risk Division · remote · since February 2024 · Senior DevOps Engineer since July 2026
+Sberbank · Risk Division · remote · Senior DevOps Engineer since February 2024
 
 - I built the rollout service that deploys about **150 releases a week** to production. It installs them at night and on weekends, in the bank's maintenance windows. It re-checks approvals before each step, and a failed wave stops the waves after it. After a crash it checks what really ran instead of retrying blindly. Across the division, 86% of production installs now start unattended.
 - I built the release platform (Python, PostgreSQL, Helm), and I am its only maintainer. Nearly all releases of the division are created on it. It assembles each release from Jira tasks and Nexus builds, fills in the change request and moves it through quality gates. Release coordination went from **2–4 hours to under 10 minutes**. After my 2026 redesign the platform grew from 2 teams to about 40.
